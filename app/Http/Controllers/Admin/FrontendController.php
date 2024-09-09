@@ -12,4 +12,9 @@ class FrontendController extends Controller
     {
         return view('admin.index');
     }
+
+
+
+
+    
 }
