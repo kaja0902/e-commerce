@@ -38,13 +38,13 @@
     </div>
   </div>
 
-<div class="py-3 mb-4 shadow-sm bg-danger border-top">
+<div class="py-3 mb-4 shadow-sm bg-warning border-top">
     <div class="container">
         <h6 class="mb-0">
-            <a href="{{ url('category') }}">
+            <a href="{{ url('category/') }}">
                 Collections
             </a> /
-            <a href="{{ url('category/'.$products->category->slug) }}">
+            <a href="{{ url('view-category/'.$products->category->slug) }}">
                 {{ $products->category->name }}
             </a> /
             <a href="{{ url('category/'.$products->category->slug.'/'.$products->slug) }}">
