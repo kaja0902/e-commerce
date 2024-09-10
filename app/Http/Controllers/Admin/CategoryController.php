@@ -49,6 +49,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         return view('admin.category.edit', compact('category'));
+
+        
     }
 
     public function update(Request $request, $id)
