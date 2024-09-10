@@ -109,7 +109,7 @@
             }
         });
 
-        $('.delete-cart-idem').click(function (e) { 
+        $('.delete-cart-item').click(function (e) { 
             e.preventDefault();
 
             var prod_id = $(this).closest('.product_data').find('input[name=prod_id]').val();
