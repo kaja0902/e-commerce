@@ -25,7 +25,7 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>
-                                <a href="{{ url('view-users/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
+                                <a href="{{ url('view-user/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
                             </td>
                         </tr>
                     @endforeach

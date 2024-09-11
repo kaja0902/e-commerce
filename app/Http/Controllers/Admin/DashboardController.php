@@ -16,9 +16,12 @@ class DashboardController extends Controller
     }
 
     public function viewuser($id){
+        $user = User::find($id); // Pronalaženje korisnika prema ID-u
         
-        $user = User::find($id);
-        return view('admin.users.view', compact('users'));
-
+        if ($user) {
+            return view('admin.users.view', compact('user')); // Prosleđivanje promenljive 'user'
+        } else {
+            return redirect('/')->with('status', "User not found");
+        }
     }
 }
