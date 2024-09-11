@@ -38,29 +38,34 @@
 
         $('.addToCartBtn').click(function(e) {
             e.preventDefault();
-
-            var product_id = $(this).closest('.product_data').find('.prod_id').val();
+        
             var product_qty = $(this).closest('.product_data').find('.qty-input').val();
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                method: "POST",
-                url: "/add-to-cart",
-                data: {
-                    'product_id': product_id,
-                    'product_qty' : product_qty,
-                },
-                success: function (response){
-                    swal(response.status);
-                    loadcart();
-                }
-            });
-
+            var product_stock_qty = $(this).closest('.product_data').find('.stock_qty').val();
+        
+            if (product_stock_qty <= 0) {
+                swal("Out of stock", "This product is currently out of stock", "warning");
+            } else {
+                var product_id = $(this).closest('.product_data').find('.prod_id').val();
+        
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+        
+                $.ajax({
+                    method: "POST",
+                    url: "/add-to-cart",
+                    data: {
+                        'product_id': product_id,
+                        'product_qty' : product_qty,
+                    },
+                    success: function (response){
+                        swal(response.status);
+                        loadcart();
+                    }
+                });
+            }
         });
 
         $('.addToWishlist').click(function (e){
