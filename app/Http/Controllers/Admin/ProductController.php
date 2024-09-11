@@ -52,10 +52,10 @@ class ProductController extends Controller
         return redirect('products')->with('status', "Product Added Successfully");
     }
 
-    public function edit($id){
-
+    public function edit($id) {
         $products = Product::find($id);
-        return view('admin.product.edit', compact('products'));
+        $categories = Category::all(); // povuci sve kategorije
+        return view('admin.product.edit', compact('products', 'categories'));
     }
 
     public function update(Request $request, $id){
@@ -75,6 +75,7 @@ class ProductController extends Controller
             $file ->move('assets/uploads/products',$filename);
             $products->image = $filename;
         }
+        $products->cate_id = $request->input('category_id');
         $products->name = $request->input('name'); 
         $products->slug = $request->input('slug'); 
         $products->small_description = $request->input('small_description'); 
