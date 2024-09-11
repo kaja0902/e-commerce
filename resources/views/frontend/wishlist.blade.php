@@ -35,7 +35,7 @@
                                 <h6> rsd {{ $item->products->selling_price }}</h6>
                             </div>
                             <div class="col-md-2 my-auto">
-                                <input type="hidden" name="prod_id" value="{{ $item->prod_id }}">
+                                <input type="hidden" name="prod_id" class="prod_id" value="{{ $item->prod_id }}">
                                 @if ( $item->products->qty >= $item->prod_qty)
                                     <label for="Quantity">Quantity</label>
                                     <div class="input-group text-center mb-3" style="width:130px">

@@ -53,7 +53,6 @@
                                 <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash">Remove</i></button>
                             </div>
                         </div>
-                        @php $total += $item->products->selling_price * $item->prod_qty ; @endphp
                     @endforeach
                 </div>   
                 <div class="card-footer">
