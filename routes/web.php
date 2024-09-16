@@ -35,7 +35,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('category', [FrontendController::class,'category']);
 Route::get('view-category/{slug}', [FrontendController::class, 'viewcategory']);
-Route::get('category/{cate_slug}/{prod_slug}', [FrontendController::class, 'productview']);
+Route::get('category/{cate_slug}/{prod_slug}', [FrontendController::class, 'productview'])->name('productview');
 
 
 Auth::routes();
@@ -46,7 +46,7 @@ Route::get('load-wishlist-count', [WishlistController::class, 'wishlistcount']);
 Route::post('add-to-cart', [CartController::class, 'addProduct']);
 Route::post('delete-cart-item', [CartController::class, 'deleteProduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);
-
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 Route::post('add-to-wishlist', [WishlistController::class, 'add']);
 Route::post('delete-wishlist-item', [WishlistController::class, 'deleteitem']);
 Route::get('wishlist', [WishlistController::class, 'index']);
