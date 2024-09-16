@@ -104,4 +104,25 @@ class ProductController extends Controller
         $products->delete();
         return redirect('products')->with('status', "Product deleted successfully");
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search'); // Uzimamo unos iz pretrage
+
+        // Ako je unos prazan, vrati prazne rezultate
+        if (strlen($query) < 1) {
+            return view('frontend.search-results', [
+                'products' => collect(), // Prazna kolekcija
+                'query' => $query
+            ]);
+        }
+
+        // Pretraga po imenu i opisu proizvoda
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+                            ->orWhere('description', 'LIKE', "%{$query}%")
+                            ->get();
+
+        // Vraćamo view s rezultatima pretrage
+        return view('frontend.search-results', compact('products', 'query'));
+    }
 }

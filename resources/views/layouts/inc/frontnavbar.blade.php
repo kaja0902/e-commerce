@@ -6,6 +6,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <form class="navbar-form" method="GET" action="{{ route('product.search') }}">
+          <div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search..." name="search">
+            <button type="submit" class="btn btn-white btn-round btn-just-icon" >
+              <i class="material-icons">search</i>
+              <div class="ripple-container"></div>
+            </button>
+          </div>
+        </form>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
