@@ -49,6 +49,8 @@ Route::post('update-cart', [CartController::class, 'updateCart']);
 
 Route::post('add-to-wishlist', [WishlistController::class, 'add']);
 Route::post('delete-wishlist-item', [WishlistController::class, 'deleteitem']);
+Route::get('wishlist', [WishlistController::class, 'index']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', [CartController::class, 'viewcart']);
@@ -61,8 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('view-order/{id}', [UserController::class, 'view']);
 
     Route::get('add-rating', [RatingController::class, 'add']);
-
-    Route::get('wishlist', [WishlistController::class, 'index']);
+    Route::get('products', [ProductController::class, 'index']);
+    
 
     Route::post('proceed-to-pay', [CheckoutController::class, ('razorpaycheck')]);
 
@@ -80,7 +82,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function(){
     Route::put('update-category/{id}',[CategoryController::class, 'update']);
     Route::get('delete-category/{id}',[CategoryController::class, 'destroy']);
 
-    Route::get('products', [ProductController::class, 'index']);
+   
     Route::get('add-products', [ProductController::class, 'add']);
     Route::post('insert-product', [ProductController::class, 'insert']);
     Route::get('edit-product/{id}', [ProductController::class,'edit']);
