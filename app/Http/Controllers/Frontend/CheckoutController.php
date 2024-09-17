@@ -56,7 +56,11 @@ class CheckoutController extends Controller
             //$total_price += $prod->products->selling_price * $prod->qty;
         }
 
-        $order->total_price = $totalPrice;
+        $deliveryPrice = env('DELIVERY_PRICE', 0);
+        $totalPriceWithDelivery = $totalPrice + $deliveryPrice;
+
+        $order->total_price = $totalPriceWithDelivery;
+        $order->delivery_price = $deliveryPrice; 
         $order->save();
 
         if(Auth::user()->adress1 == NULL){

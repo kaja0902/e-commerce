@@ -109,6 +109,7 @@ class ProductController extends Controller
     {
         $query = $request->input('search'); // Uzimamo unos iz pretrage
 
+        $query = htmlspecialchars($query, ENT_QUOTES, 'UTF-8');
         // Ako je unos prazan, vrati prazne rezultate
         if (strlen($query) < 1) {
             return view('frontend.search-results', [

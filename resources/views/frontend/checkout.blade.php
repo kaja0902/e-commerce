@@ -74,6 +74,7 @@
                                         <th>Name</th>
                                         <th>Qty</th>
                                         <th>Price</th>
+                                        <th>Total Price</th> <!-- Dodaj novu kolonu -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,12 +82,24 @@
                                     <tr>
                                         <td>{{ $item->products->name }}</td>
                                         <td>{{ $item->prod_qty }}</td>
-                                        <td>{{ $item->products->selling_price }}</td>     
+                                        <td>{{ $item->products->selling_price }}</td>
+                                        <td>{{ $item->prod_qty * $item->products->selling_price }}</td> <!-- Ukupna cena za stavku -->
                                     </tr>
                                     @endforeach 
                                 </tbody>
-                            </table>
+                            </table> 
                             <hr>
+                            <h6>Delivery Price: {{ env('DELIVERY_PRICE', 0) }} RSD</h6>
+
+                            @php
+                                $totalPrice = 0;
+                                foreach ($cartitems as $item) {
+                                    $totalPrice += $item->prod_qty * $item->products->selling_price;
+                                }
+                                $totalPriceWithDelivery = $totalPrice + env('DELIVERY_PRICE', 0);
+                            @endphp
+
+                            <h6>Total Price (with Delivery): {{ $totalPriceWithDelivery }} RSD</h6>
                             <button type="submit" class="btn btn-success w-100">Place Order | COD</button>
                             <button type="button" class="btn btn-primary w-100 mt-3 razorpay_btn">Pay with Razorpay</button>
                         </div>
