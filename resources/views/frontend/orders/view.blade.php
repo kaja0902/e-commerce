@@ -62,7 +62,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <h4 class="px-2">Grand Total: <span class="float-end"> {{ $orders->total_price }} </span></h4> 
+                                <h4 class="px-2">Subtotal: <span class="float-end"> {{ $orders->total_price - $orders->delivery_price }} </span></h4>
+                                <h4 class="px-2">Delivery Price: <span class="float-end"> {{ $orders->delivery_price }} </span></h4>
+                                <h4 class="px-2">Grand Total: <span class="float-end"> {{ $orders->total_price }} </span></h4>
                             </div>
                         </div>
                               
