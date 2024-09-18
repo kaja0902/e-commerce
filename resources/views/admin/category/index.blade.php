@@ -4,6 +4,7 @@
     <div class="card">
         <div class="card-header">
             <h4>Category Page</h1>
+                <a href="{{ url('add-category')}}" class="btn btn-primary">Add category</a>
             <hr>
         </div>
         <div class="card-body">
