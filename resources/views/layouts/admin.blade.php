@@ -35,6 +35,8 @@
         <script src="{{ asset('admin/js/popper.min.js') }}" defer></script>
         <script src="{{ asset('admin/js/bootstrap-material-design.min.js') }}" defer></script>
         <script src="{{ asset('admin/js/perfect-scrollbar.jquery.min.js') }}" defer></script>
+        <script src="https://code.highcharts.com/es5/highcharts.js"></script>
+        <script src="https://code.highcharts.com/es5/modules/exporting.js"></script>
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         @if(session('status'))

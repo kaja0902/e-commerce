@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -31,4 +32,15 @@ class Order extends Model
     public function orderItems(){
         return $this->hasMany(OrderItem::class);
     }
+
+    
+
+    public static function getOrderCountByMonth()
+    {
+        return DB::table('orders')
+            ->select(DB::raw('COUNT(*) as count'), DB::raw('MONTH(created_at) as month'))
+            ->groupBy('month')
+            ->pluck('count', 'month')->all();
+    }
+
 }
