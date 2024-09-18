@@ -4,6 +4,7 @@
     <div class="card">
         <div class="card-header">
             <h4>Product Page</h1>
+            <a href="{{ url('add-products')}}" class="btn btn-primary">Add products</a>
             <hr>
         </div>
         <div class="card-body">
