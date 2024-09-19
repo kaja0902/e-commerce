@@ -43,4 +43,14 @@ class Order extends Model
             ->pluck('count', 'month')->all();
     }
 
+    public static function getOrderCountByWeek()
+{
+    return DB::table('orders')
+        ->select(DB::raw('COUNT(*) as total_orders'), DB::raw('WEEK(created_at) as week'))
+        ->where('created_at', '>=', now()->subWeeks(10)) // Prikazujemo poslednjih 10 nedelja
+        ->groupBy('week')
+        ->orderBy('week', 'ASC')
+        ->get();
+}
+
 }
