@@ -28,20 +28,31 @@ class DashboardController extends Controller
     }
 
     public function getOrdersPerMonth() {
+        // Porudžbine po mesecima
         $ordersPerMonth = DB::table('orders')
             ->select(DB::raw('COUNT(*) as total_orders'), DB::raw('MONTH(created_at) as month'))
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->orderBy(DB::raw('MONTH(created_at)'))
             ->get();
-
-        // Pretvaranje u nizove koji će se koristiti u Highcharts
+    
         $months = $ordersPerMonth->pluck('month')->map(function($month) {
-            return date('F', mktime(0, 0, 0, $month, 10)); // Pretvaranje broja meseca u naziv meseca
+            return date('F', mktime(0, 0, 0, $month, 10));
         })->toArray();
-
+    
         $orderCounts = $ordersPerMonth->pluck('total_orders')->toArray();
-
-        return view('admin.index', compact('months', 'orderCounts'));
+    
+        // Porudžbine po nedeljama (poslednjih 10 nedelja)
+        $ordersPerWeek = DB::table('orders')
+            ->select(DB::raw('COUNT(*) as total_orders'), DB::raw('WEEK(created_at) as week'))
+            ->where('created_at', '>=', now()->subWeeks(10))
+            ->groupBy('week')
+            ->orderBy('week', 'ASC')
+            ->get();
+    
+        $weeks = $ordersPerWeek->pluck('week')->toArray();
+        $orderCountsPerWeek = $ordersPerWeek->pluck('total_orders')->toArray();
+    
+        return view('admin.index', compact('months', 'orderCounts', 'weeks', 'orderCountsPerWeek'));
     }
 
 }
