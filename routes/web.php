@@ -50,10 +50,10 @@ Route::get('/search', [ProductController::class, 'search'])->name('product.searc
 Route::post('add-to-wishlist', [WishlistController::class, 'add']);
 Route::post('delete-wishlist-item', [WishlistController::class, 'deleteitem']);
 Route::get('wishlist', [WishlistController::class, 'index']);
+Route::get('cart', [CartController::class, 'viewcart']);
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('cart', [CartController::class, 'viewcart']);
     Route::get('checkout', [CheckoutController::class, 'index']);
     Route::post('place-order', [CheckoutController::class, 'placeorder']);
     Route::get('change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('change-password');
