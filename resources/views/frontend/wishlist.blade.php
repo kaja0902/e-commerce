@@ -48,22 +48,10 @@
                             @else
                                 <h6>Price not available</h6>
                             @endif
-                        </div>
+                        </div>                                    
                         <div class="col-md-2 my-auto">
                             <input type="hidden" name="prod_id" class="prod_id" value="{{ $item->id }}">
-                            
-                            <!-- Prikaz količine i provera zaliha -->
-                            @if (isset($item->qty) && $item->qty >= 1)
-                            
-                                <label for="Quantity">Quantity</label>
-                                <div class="input-group text-center mb-3" style="width:130px">
-                                    <button class="input-group-text decrement-btn">-</button>
-                                    <input type="text" name="quantity" class="form-control qty-input text-center" value="1">
-                                    <button class="input-group-text increment-btn">+</button>
-                                </div>
-                            @else
-                                <h6>Out of stock</h6>
-                            @endif
+                            <input type="hidden" name="quantity" class="form-control qty-input text-center" value="1">
                         </div>
 
                         <div class="col-md-2 my-auto">

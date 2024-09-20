@@ -25,9 +25,12 @@
                                     <a href="{{ url('category/'.$category->slug.'/'.$prod->slug) }}">
                                         <img src="{{ asset('assets/uploads/products/'.$prod->image) }}" alt="Product image" width="304px" />
                                         <div class="card-body">
-                                            <h5>{{ $prod->names }}</h5>
-                                            <span class="float-start">{{ $prod->selling_price }}</span>
+                                            <h5>{{ $prod->name }}</h5>
+                                            <p>
+                                                {{ $prod->description }}
+                                            </p>
                                             <span class="float-end"><s>{{ $prod->original_price }}</s></span>
+                                            <span class="float-start">{{ $prod->selling_price }}</span>
                                         </div>
                                     </a>
                                 </div>
