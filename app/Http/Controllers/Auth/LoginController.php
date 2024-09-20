@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Cart;
 use App\Models\Wishlist;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,16 +32,43 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected function authenticated()
-    {
-        if(Auth::user()->role_as == '1') //1 = Admin Login
-        {
-            return redirect('/dashboard')->with('status','Welcome to your dashboard');
+{
+    // Migracija sesije u bazu nakon logovanja
+    if (Session::has('cart')) {
+        $cartItems = Session::get('cart');
+
+        foreach ($cartItems as $item) {
+            // Proveri da li proizvod već postoji u korisnikovoj korpi
+            $existingCartItem = Cart::where('user_id', Auth::id())
+                                    ->where('prod_id', $item['prod_id'])
+                                    ->first();
+
+            if (!$existingCartItem) {
+                // Ako proizvod ne postoji, dodaj ga u bazu
+                Cart::create([
+                    'user_id' => Auth::id(),
+                    'prod_id' => $item['prod_id'],
+                    'prod_qty' => $item['qty'],
+                ]);
+            }
         }
-        elseif(Auth::user()->role_as == '0') // Normal or Default User Login
-        {
-            return redirect('/')->with('status','Logged in successfully');
-        }
+
+        // Očisti korpu iz sesije nakon prebacivanja u bazu
+        Session::forget('cart');
     }
+
+    // Sada obavi redirekciju
+    if (Auth::user()->role_as == '1') //1 = Admin Login
+    {
+        return redirect('/dashboard')->with('status','Welcome to your dashboard');
+    }
+    elseif (Auth::user()->role_as == '0') // Normal or Default User Login
+    {
+        return redirect('/')->with('status','Logged in successfully');
+    }
+}
+
+    
 
     /**
      * Create a new controller instance.
