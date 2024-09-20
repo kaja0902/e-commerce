@@ -126,7 +126,7 @@
                 },
                 success: function (response){
                     window.location.reload();
-                    swal("", response.status, "success");
+                    swal(response.status);
                 }
             });
         });
@@ -143,7 +143,7 @@
                 },
                 success: function (response){
                     window.location.reload();
-                    swal("", response.status, "success");
+                    swal(response.status);
                 }
             });
 

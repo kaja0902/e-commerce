@@ -22,7 +22,7 @@
                 title: {
                     text: 'Monthly Orders'
                 },
-                xAxis: {
+                xAxis: {           
                     categories: {!! json_encode($months) !!},
                     title: {
                         text: 'Month'
@@ -52,30 +52,36 @@
                 }]
             });
 
-            // Chart za porudžbine po nedeljama
-            const chart = Highcharts.chart('ordersWeekChart', {
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'Orders in the Last 10 Weeks'
-                },
-                xAxis: {
-                    categories: {!! json_encode($weeks) !!}, // Kategorije - nedelje
+           // Chart za porudžbine po nedeljama
+                const chart = Highcharts.chart('ordersWeekChart', {
+                    chart: {
+                        type: 'bar'
+                    },
                     title: {
-                        text: 'Week'
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: 'Number of Orders'
-                    }
-                },
-                series: [{
-                    name: 'Orders',
-                    data: {!! json_encode($orderCountsPerWeek) !!} // Broj porudžbina po nedeljama
-                }]
-            });
+                        text: 'Orders in the Last 10 Weeks'
+                    },
+                    xAxis: {
+                        categories: {!! json_encode($weeks) !!}, // Kategorije - nedelje
+                        title: {
+                            text: 'Week'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Number of Orders'
+                        },
+                        tickInterval: 1, // Postavi razmak između tickova
+                        labels: {
+                            formatter: function() {
+                                return Math.round(this.value); // Prikazuj celu vrednost
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Orders',
+                        data: {!! json_encode($orderCountsPerWeek) !!} // Broj porudžbina po nedeljama
+                    }]
+});
 
         });
     </script>
